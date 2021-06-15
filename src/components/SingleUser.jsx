@@ -6,9 +6,10 @@ const SingleUser = ({ user }) => {
   const { docId, login, avatar_url, html_url, node_id } = user
   const { favoriteUsers, addFavoriteUser, removeFavoriteUser } =
     useContext(GithubUsersContext)
-  const nodeIds = favoriteUsers.map((u) => u.node_id)
 
-  const [isFavorite, setIsFavorite] = useState(nodeIds.includes(node_id))
+  // looks for node_id in firebase
+  const favUser = favoriteUsers.find((u) => u.node_id === node_id)
+  const [isFavorite, setIsFavorite] = useState(favUser)
 
   return (
     <article className='card'>
@@ -18,8 +19,8 @@ const SingleUser = ({ user }) => {
             removeFavoriteUser(docId)
           } else {
             addFavoriteUser(user)
+            setIsFavorite(!isFavorite)
           }
-          setIsFavorite(!isFavorite)
         }}
         className={isFavorite ? 'star-icon is-favorite' : 'star-icon'}
       >

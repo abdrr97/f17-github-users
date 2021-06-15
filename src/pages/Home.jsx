@@ -4,6 +4,7 @@ import { GithubUsersContext } from '../context/context'
 
 // SingleUser component
 import SingleUser from '../components/SingleUser'
+import Navbar from '../components/Navbar'
 
 const Home = () => {
   const { users, loading, searchUsers } = useContext(GithubUsersContext)
